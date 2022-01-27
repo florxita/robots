@@ -1,9 +1,6 @@
 const activeSlider = document.getElementById('contenedorRobots')
 //<--inserto vista previa del robot --> crearSliderRobot 
 
-
-const fileRobotBtn = document.getElementById('fileRobotBtn') //este es el boton que crea la seccion completa
-
 const header = document.getElementById('header'),
       main = document.getElementById('main'),//<-- solo contiene el home/inicio
 
@@ -27,7 +24,7 @@ async function obtenerDatos(indiceRobot){
     const response = await fetch("http://127.0.0.1:5500/robots.json");
     const robots = await response.json();
 
-    //console.log(robots[0])//<--- es para guiarme 
+    console.log(robots[0])//<--- es para guiarme 
 
     // pruebo de localizar cada indice para las tabs / ESTADISTICAS / BARRAS DE COLOR / solo el .value es el que voy a usar para esto
     energy = robots[indiceRobot][0].statistics[0].energy[0].value,
@@ -35,45 +32,19 @@ async function obtenerDatos(indiceRobot){
     complexity = robots[indiceRobot][0].statistics[0].complexity[0].value,
     security = robots[indiceRobot][0].statistics[0].security[0].value
 
+    ////////  FUNCIONES QUE SE EJECUTAN AL CARGAR EL .JSON  ////////
+
     //ejecuto la funcion y creo slider , tambien la tabla de precios
     crearSliderRobot(robots, indiceRobot) // mi array robot +
     //crearTablaPrecios(planes)
-
-    crearPerfil(robots, indiceRobot) //<-- ejecuto la seccion completa del robot seleccionado
+    capturarEventoArrow(robots, indiceRobot) //<-- guarde el evento de las flechas del slider
+    capturarEventoBotonVerFicha() // <-- guarde el evento click sobre el boton "ver ficha" y "back"
+    crearPerfil(robots, indiceRobot)
     crearEstadisticas(robots, indiceRobot)
+    //crearTooltip(robots,indiceRobot)
+    
 
 }
-    //crearTooltip()//------------------------esto anda y lo inserta....ver porque el otro no
-
-
-
-////////////////////////////////////////////////////////////
-
-//VISTA PREVIA DEL ROBOT EN EL INICIO
-//eventListener de arrows
-document.addEventListener('click', (e) =>{ 
-        e.preventDefault
-        // e.cancelBubbl   
-        if(e.target.id === 'arrowRight') { 
-            indiceRobot++  //incremento el indice
-            // console.log('-----------');
-            // console.log('Aumentando' + indiceRobot)
-            // console.log('Aumentando' + robots.length)
-            if(indiceRobot == robots.length){
-                indiceRobot = 0
-            }
-            crearSliderRobot(robots, indiceRobot);
-
-        }else if(e.target.id === 'arrowLeft'){
-            indiceRobot-- //resto el indice
-            console.log('-----------');
-            console.log('Restando' + robots.length)
-            if(indiceRobot < 0){
-                indiceRobot = robots.length - 1
-            }
-            crearSliderRobot(robots, indiceRobot);
-        }
-})
 
 
 //creo slider con template --- en el home/inicio -- no en la seccion de datos del robot
@@ -95,121 +66,58 @@ crearSliderRobot = (robots, indiceRobot) => { // e inserto el html dentro de sec
     `
 }
 
-//////////////////////////////////////////////////////////////////
+//VISTA PREVIA DEL ROBOT EN EL INICIO
 
-// TEMPLATE que quiero insertar en el PERFIL DEL ROBOT + lo que esta en html
+//eventListener de arrows // al hacer click activa la funcion de crearSliderRobot
+const capturarEventoArrow = (robots, indiceRobot) =>{ 
+    document.addEventListener('click', (e) =>{ 
+        e.preventDefault
+        //e.cancelBubble  
+        if(e.target.id === 'arrowRight') { 
+            indiceRobot++  //incremento el indice
+            // console.log('-----------');
+            // console.log('Aumentando' + indiceRobot)
+            //console.log('Aumentando' + robots.length)
+            if(indiceRobot == robots.length){
+                indiceRobot = 0
+            }
+            crearSliderRobot(robots, indiceRobot);
 
-crearPerfil = (robots, indiceRobot) => { //la estoy ejecutando arriba en el Async
-    perfilRobot.innerHTML = `
-    <div id="sliderElement">
-         <img class="image__robot" src="${robots[indiceRobot][0].src}" alt="robot">
-                <div class ="text__robot__slider">
-                    <h2 class="robot__name title">${robots[indiceRobot][0].name}</h2>
-                    <h3 class="s__work">${robots[indiceRobot][0].type}</h3>
-                    <p class="description__text">${robots[indiceRobot][0].description}</p>
-                </div>
-    </div>
-    `
-    
+        }else if(e.target.id === 'arrowLeft'){
+            indiceRobot-- //resto el indice
+            //console.log('-----------');
+            //console.log('Restando' + robots.length)
+            //console.log('Aumentando' + indiceRobot)
+            if(indiceRobot < 0){
+                indiceRobot = robots.length - 1
+            }
+            crearSliderRobot(robots, indiceRobot);
+        }
+    })
 }
-crearEstadisticas = () => { //el template con los ids que guardo luego
-    //fijate como evitas usar dif. ID para agregar los tooltips
-    stadisticsItems.innerHTML = `
-        <div class="bar__item" id="energyBar">
-            <p>Energia</p>
-            <div class="bar__color">
-                <div id="barBlue" class="clr"></div>
-            </div>
-        </div>
+ //EVENTLISTENER DEL BOTON "VER FICHA"
+const fileRobotBtn = document.getElementById('fileRobotBtn') //este es el boton que crea la seccion completa
 
-        <div class="bar__item" id="maintenanceBar">
-            <p>Mantenimiento</p>
-            <div class="bar__color">
-                <div id="barPink" class="clr"></div>
-            </div>
-       </div>
-
-        <div class="bar__item" id="complexBar">
-            <p>Complejidad</p>
-            <div class="bar__color">
-                <div id= "barOrange" class="clr"></div>
-            </div>
-        </div>
-
-        <div class="bar__item" id="securityBar">
-            <p>Seguridad</p>
-            <div class="bar__color">
-                <div id="barGreen" class="clr"></div>
-            </div>
-            
-        </div>`
-         
-        // aca no va --> insertarTooltips()
-        
-    barBlue = document.getElementById('barBlue');
-    barPink = document.getElementById('barPink');
-    barOrange = document.getElementById('barOrange');
-    barGreen = document.getElementById('barGreen')
-
-    const darEstilos = () => {
-        barBlue.style.width = `${energy}%`;
-        barBlue.style.background = "var(--blueGradient)";
-    
-        barPink.style.width = `${maintenance}%`;
-        barPink.style.background = "var(--pinkGradient)";
-    
-        barOrange.style.width = `${complexity}%`;
-        barOrange.style.background = "var(--orangeGradient)";
-    
-        barGreen.style.width = `${security}%`;
-        barGreen.style.background = "var(--greenGradient)";
-    }
-
-    // switch (robots[0][0].id) {
-    //     case 'r1':
-    //            darEstilos()      
-    //         break;
-    //     case 'r2':
-    //         console.log('estas en el r2')
-    //         break;
-    
-    //     case 'r3':
-    //         console.log('estas en el r3')
-    
-    //         break;
-    
-    //     case 'r4':
-    //         console.log('estas en el r4')
-    
-    //         break;
-    // }
+const capturarEventoBotonVerFicha = () => { // guardo el evento al clikear el boton "Ver Ficha Robot"
+    document.addEventListener('click', e =>{
+        e.preventDefault()
+        e.stopPropagation()
+        // esto no anda aca --> crearPerfil(robots, indiceRobot) //<-- ejecuto la seccion completa del robot seleccionado //le cambio el display para que se muestre al hacer click en el boton
+        if(e.target.id == 'fileRobotBtn'){
+            main.classList.add('display__none');
+            header.classList.add('display__none');
+            sectionPerfilRobots.classList.remove('display__none') 
+            sectionPerfilRobots.classList.add('perfilRobotActive') ;
+        }
+        if(e.target.id === 'backBtn'){ // y ahora la flecha back le devuelve el display anterior
+            main.classList.remove('display__none');
+            header.classList.remove('display__none');
+            sectionPerfilRobots.classList.remove('perfilRobotActive')
+        }
+    })
 }
 
-
-
-
-//////////////////////////////////////////////////////////////////
-
-//EVENTLISTENER DEL BOTON "VER FICHA"
-
-document.addEventListener('click', e =>{
-    e.preventDefault()
-    e.stopPropagation()
-    crearPerfil() //le cambio el display para que se muestre al hacer click en el boton
-    if(e.target.id == 'fileRobotBtn'){
-        main.classList.add('display__none');
-        header.classList.add('display__none');
-        sectionPerfilRobots.classList.remove('display__none') 
-        sectionPerfilRobots.classList.add('perfilRobotActive') ;
-    }
-    if(e.target.id === 'backBtn'){ // y ahora la flecha back le devuelve el display anterior
-        main.classList.remove('display__none');
-        header.classList.remove('display__none');
-        sectionPerfilRobots.classList.remove('perfilRobotActive')
-    }
-})
-
-//////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////
 
 //OBJETO TABLA PRECIOS
 
@@ -255,25 +163,100 @@ prices.innerHTML = `
 })
 
 ///////////////////////////////////////////////////////////
+///////////////// PERFIL ROBOT ///////////////////////////
 
 //console.log(robots[0][0].statistics[0].complexity[0].value)  
-              
 
-// imprimir al hacer click / hover + info sobre el item
-insertarTooltips = () => {
+
+crearPerfil = (robots, indiceRobot) =>{ // TEMPLATE que quiero insertar en PERFIL ROBOT
+    perfilRobot.innerHTML = `
+    <div id="sliderElement">
+         <img class="image__robot" src="${robots[indiceRobot][0].src}" alt="robot">
+                <div class ="text__robot__slider">
+                    <h2 class="robot__name title">${robots[indiceRobot][0].name}</h2>
+                    <h3 class="s__work">${robots[indiceRobot][0].type}</h3>
+                    <p class="description__text">${robots[indiceRobot][0].description}</p>
+                </div>
+    </div>
+    `
+    
+}
+//-----------------------------------------------------------
+
+crearEstadisticas = (robots) => { //el template con los ids que guardo luego
+    stadisticsItems.innerHTML = `
+        <div class="bar__item" id="energyBar">
+            <p>Energia</p>
+            <div class="bar__color">
+                <div id="barBlue" class="clr"></div>
+            </div>
+        </div>
+
+        <div class="bar__item" id="maintenanceBar">
+            <p>Mantenimiento</p>
+            <div class="bar__color">
+                <div id="barPink" class="clr"></div>
+            </div>
+       </div>
+
+        <div class="bar__item" id="complexBar">
+            <p>Complejidad</p>
+            <div class="bar__color">
+                <div id= "barOrange" class="clr"></div>
+            </div>
+        </div>
+
+        <div class="bar__item" id="securityBar">
+            <p>Seguridad</p>
+            <div class="bar__color">
+                <div id="barGreen" class="clr"></div>
+            </div>
+            
+        </div>`
+    // capturo los ids de cada barrita       
+    barBlue = document.getElementById('barBlue');
+    barPink = document.getElementById('barPink');
+    barOrange = document.getElementById('barOrange');
+    barGreen = document.getElementById('barGreen')
+
+    darEstilos() // le doy los estilos
+    insertarTooltips()
+
+}
+
+const darEstilos = () => { // para darle elcolor y % a cada barra
+            barBlue.style.width = `${energy}%`;
+            barBlue.style.background = "var(--blueGradient)";
+            barPink.style.width = `${maintenance}%`;
+            barPink.style.background = "var(--pinkGradient)";
+            barOrange.style.width = `${complexity}%`;
+            barOrange.style.background = "var(--orangeGradient)";
+            barGreen.style.width = `${security}%`;
+            barGreen.style.background = "var(--greenGradient)";
+}
+
+// TOOLTIPS
+const insertarTooltips = () => {
     const barrita = document.getElementById('stadisticsItems')
     const contenedorBarras = barrita.children
     const barras = Array.from(contenedorBarras)
-    //console.log(barras)
+    console.log(barras)
     barras.forEach( barra => {
         barra.addEventListener('click', e =>{
             //console.log(e.currentTarget.id)
             if(e.currentTarget.id == 'energyBar'){
                 console.log('barra 1')
-                
+                crearTooltip(e.currentTarget)
+                // e.currentTarget.innerHTML = `
+                // <div id="tool" class="tooltip">
+                //      <h5>energia 50%</h5>
+                //      <p>controla su gasto de energía tomando pequeñas siestas mientras tu descansas.
+                //     Su gasto máximo puede llegar al 80% luego de una tarde jugando en el jardín, reservando el 20% para protegerte por las noches.
+                //     Tiempo de carga de bateria (100%): 2hs.</p>
+                // </div>`
             }else if(e.currentTarget.id == 'maintenanceBar'){
                 console.log('barra 2')
-                crearTooltip(robot)
+                //crearTooltip(robot)
             }else if(e.currentTarget.id == 'complexBar'){
                 console.log('barra 3')
             }else if(e.currentTarget.id == 'securityBar'){
@@ -284,16 +267,38 @@ insertarTooltips = () => {
     
 }
 
-crearTooltip = () => {
-    tool.innerHTML = `
-                <h5 >Mantenimiento 60%</h5>
-                <p> controla su gasto de energía tomando pequeñas siestas mientras tu descansas.
-                    Su gasto máximo puede llegar al 80% luego de una tarde jugando en el jardín, reservando el 20% para protegerte por las noches.
-                    Tiempo de carga de bateria (100%): 2hs.</p>`
-
+crearTooltip = (robots, indiceRobot) => { //quiero crear un tooltip por cada barra
+    //no se que poner aca-->
+    e.currentTarget.innerHTML = `
+    <div class="tooltip">
+         <h5>${robots[indiceRobot][0].statistics[0].energy[0].value}</h5>
+         <p>controla su gasto de energía tomando pequeñas siestas mientras tu descansas.
+        Su gasto máximo puede llegar al 80% luego de una tarde jugando en el jardín, reservando el 20% para protegerte por las noches.
+        Tiempo de carga de bateria (100%): 2hs.</p>
+    </div>`
 }
 
-//-------------------------------------//
+
+    
+// switch ('energyBar') {
+//         case 'energyBar':
+//                console.log('hago algo en r1')      
+//             break;
+//         case 'maintenace':
+//             console.log('hago algo en r2')   
+//             break;
+
+//         case 'complexity':
+//             console.log('hago algo en r3')
+//             break;
+
+//         case 'security':
+//             console.log('hago algo en r4')
+
+//             break;
+//     }
+
+
 
 //////////////////////////////  MENU  //////////////////////////////
 
@@ -312,20 +317,3 @@ const navMenu = document.getElementById('nav-menu'),
             navMenu.classList.remove('show-menu')
         })
     }
-
-
-
-
-
-
-// //header scroll <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< a revisar
-// // const initialYOffest = window.pageYOffset
-// // window.onscroll = () =>{
-// //     myScroll = window.pageYOffset
-// //     if(initialYOffest >= myScroll){
-// //         header.style.top = '0'  
-// //     }else {
-// //         header.style.top = '-100px';     
-// //     }
-// //     initialYOffest = myScroll
-//}
