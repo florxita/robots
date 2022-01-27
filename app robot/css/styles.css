@@ -1,0 +1,565 @@
+@import url('https://fonts.googleapis.com/css2?family=Saira:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400&family=Saira:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&display=swap');
+@import url(variables.css);
+
+
+/*//////////////////////////////////////////*/
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    list-style: none;
+}
+
+html{
+    scroll-behavior: smooth;
+}
+
+body{
+    background:var(--darkBlue);
+    font-family: var(--principalTipo);
+    font-weight: var(--textWeight);
+    font-size: var(--textSize);
+    color: #fff;
+}
+header{
+    width: 100%;
+    position:fixed;
+    top: 0;
+    left: 0;
+    z-index: var(--z-fixed);
+    background: var(--darkBlue);
+    box-shadow: 0px 5px 7px rgba(0, 0, 0, 0.2);
+    
+}
+
+.main{
+    overflow: hidden;
+    margin-top: var(--header-app);
+}
+/* ----------------------------------- REUTILIZABLES ------------------------------------*/
+
+/* ////// TEXTOS ////// */
+
+h1 title{
+    font-size: var(--s-h1);
+    font-weight: var(--fw-h1);
+}
+
+h2{
+    font-size: var(--s-h2);
+    font-weight: var(--fw-h2);
+}
+
+p{
+    font-size: var(--s-text);
+    font-weight: var(--fw-p);
+    letter-spacing: .02rem;
+}
+
+/* ///// BOTONES RELLENOS ///// */
+.btn{
+    font-size: var(--s-h4);
+    font-weight: var(--fw-h4);
+    text-align: center;
+    cursor: pointer;
+    padding: 1rem;
+}
+.fill__btn{
+    border: none;
+    border-radius: .5rem;
+    color: #fff;   
+}
+
+/*para estados*/
+.fill__warning{
+    background: var(--yellow);
+}
+
+.fill__danger{
+    background: var(--danger);
+}
+
+.fill__blue{
+    background: var(--seaBlue); 
+}
+
+.fill__success{
+    background: var(--success);
+}
+
+/* ///// BOTONES LINEALES ///// */
+
+.lineal__btn{
+    border: .1rem solid;
+    background: none;
+    border-radius: .58rem;
+}
+
+.lineal__btn:hover{
+    color: #fff;
+}
+
+/* ///// para estados ///// */
+
+.lineal__warning{
+    color: var(--yellow);
+}
+
+/* ------------------------------- REUTILIZABLES FIN --------------------------------*/
+
+
+
+/* ----------------------------------- MENU MOVIL -----------------------------------*/
+
+.nav__logo__img{
+    width: 14rem;
+}
+.nav__home{
+    margin-top: var(--m-2);
+    display: flex;
+    width: 100%;
+    justify-content: space-evenly;
+    
+}
+
+/* MENU DESPLEGABLE */
+.nav__menu{  
+    position: fixed;
+    display: none;
+    flex-direction: column;  
+    color: var(--darkBlue);
+    width: 100%;
+    height: 100vh;
+    left: 0;
+    top: -150%;
+    background: #fff;
+    padding: 3.5rem;
+    transition: .4s;
+    z-index: var(--z-fixed);
+    text-align: center;
+}
+
+.icon__home{
+    cursor: pointer;
+    margin-bottom: var(--m-2);
+}
+
+.nav__link{
+    font-size: var(--s-h2);
+    font-weight: var(--fw-h2);
+    color:var(--darkBlue);
+}
+.nav__link:hover{
+    transition: .4s;
+    color:var(--deepBlue);
+}
+
+.nav__toggle, .nav__close{
+    font-size: 4rem;
+    cursor: pointer;   
+}
+.nav__close{
+ position: fixed;
+ top: 2rem;
+ left: 2.5rem;   
+}
+
+.miCuenta{
+    margin: 2rem 0;
+}
+
+.sesion__link a{
+    color: var(--deepBlue);
+    font-weight: var(--h3Weight);
+    font-size: 14px;
+}
+
+/* /////// MOSTRAR MENU  JS //////// */
+
+.show-menu{
+    top: 0;
+    display: flex;
+}
+
+/* ----------------------------------- MENU MOVIL FIN -----------------------------------*/
+.menu__app{
+    position: fixed;
+    z-index: var(--z-fixed);
+    width: 100%;
+    height: 3.75rem;
+    background: var(--gray);
+    bottom: 0;
+    border-radius: 1rem 1rem 0 0;
+    display:none;/* cambiar a flex*/
+    justify-content: center;
+}
+.icon__menu{
+    display: flex;
+    gap: 4.5rem;
+    
+}
+.icon__btn{
+    align-items: center;
+    margin: auto;
+}
+
+.img__icon{
+    filter: invert(100%);
+    height: 35px;
+}
+/* -------------------------------------- SLIDERS --------------------------------------*/
+
+.slider__box{
+    width: 100vw; 
+    margin-top: var(--m-2);  
+    background: var(--pink); 
+    position: relative; 
+}
+
+.text__slider{
+    width: 70%;
+    padding: var(--pd-movil);
+    line-height: 2rem;
+}
+
+.text__slider h1{
+    font-size: 45px;
+}
+
+.text__slider p{
+    line-height: 1.1rem;
+    margin: 1.5rem 0;
+}
+
+/*------------------------------------------------------------------*/
+
+    /*ROBOT*/
+
+.robot__name{
+    font-size: 40px;
+}
+
+.text__robot__slider{
+    margin-bottom: 3rem;
+}
+
+/* ---------------- SECTION -------------------------------------- */
+
+.slider__section, .section, .perfilRobotActive{ /*//////////*/
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    
+}
+.section, .perfilRobotActive{
+    width: 100%;
+    padding: var(--pd-movil);
+    flex-direction: column;
+}
+
+
+
+.bx-chevron-left, .bx-chevron-right{
+    color: #fff;
+    font-size: 70px;
+    cursor: pointer;
+    transform: translateY(-6rem);
+}
+
+.bx-chevron-right:hover, .bx-chevron-left:hover{
+    font-size: 90px; 
+    color:var(--yellow);
+} 
+
+/* ------------------------------------- SLIDERs FIN -------------------------------------*/
+
+.title__icon::after, .title__icon::before{
+    font-family: "Boxicons";
+    content: "\ebac";
+    padding: 1rem;
+    font-size: var(--s-h3);
+}
+
+.description__text{
+    margin: var(--m-1) 0;
+}
+
+/* TABLA DE PRECIOS */
+
+.card__price{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    background: var(--ultraContrastBlue);
+    padding: 2rem;
+    border-radius: 1rem;
+    height: auto                                ;
+}
+
+.items__list    {
+    padding: 1rem 0;
+}
+.items__list li{
+    padding-bottom: .5rem;
+}
+#btnPlan{
+    background: var(--success);
+}
+
+.price__final{
+    font-size: 35px;
+    font-weight: var(--fw-h2);
+    color: var(--success);
+}
+.price__mensual{
+    color: var(--light);
+}
+
+/* //////  FORMULARIO  /////// */
+
+form{
+    width: 80vw;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+input, textarea{
+    height: 2.5rem;
+    background: none;
+    border: 1px solid var(--seaBlue);
+    color: var(--light);
+    font-size: var(--s-h4);
+    padding:.3rem 1rem;
+    font-family: var(--principalTipo);
+}
+input::placeholder, input:focus, textarea::placeholder, textarea:focus{
+    color: var(--gray); 
+}
+
+textarea{
+    min-height: 14rem;
+    resize: vertical;
+}
+.send{
+    background: var(--seaBlue);
+    padding: .5rem 3rem;
+    display: flex;
+    align-self: flex-end;
+    cursor: pointer;
+}
+
+.social__icons{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap:1.2rem;
+    font-size: 1.4rem;
+    margin-bottom: 5rem;
+    cursor: pointer;
+}
+
+
+/*////////////// FICHA ROBOT //////////////////*/
+.back{
+    margin-right: auto;
+    font-size: 30px;
+    margin-top: 50px;
+    display: block;
+    color: #fff;
+    cursor: pointer;
+    align-self: center;
+}
+.back:after{
+    content: 'Volver al inicio';
+    font-size: 12px;
+    color: var(--seaBlue);
+}
+
+.display__none{
+    display: none;   
+}
+
+.inactive{
+    display: none;
+}
+/* tabs */
+.tabs{
+    width: 100%; 
+    border-radius: 15px;
+    background: var(--superContrastBlue);
+    background: linear-gradient(90deg, rgba(9,18,23,1) 50%,rgba(3,9,11,1) 50%);
+}
+.tab__controls{
+    display: flex;
+    justify-content: space-around;   
+    flex: 1;
+}
+.tab__active a , .tab a{
+    color: #fff;
+}
+
+.tab__content__active{
+    opacity: 1;
+}
+.tab{  
+    width: 100%;
+    text-align: center;
+    padding: .7rem;  
+}
+.tab__body{
+    background: var(--contrastBlue); 
+    border-radius: 0 0 15px 15px;
+    padding-bottom: 2rem;
+    
+}
+.tab__active{
+    background: var(--contrastBlue);    
+    z-index:var(--z-tooltip);
+    box-shadow: 3px 0px 2px rgba(0, 0, 0, 0.2);
+    border-radius: 15px 15px 0 0; 
+     
+}
+.tab:nth-child(2n){
+    background: var(--ultraContrastBlue);
+    z-index: calc(var(--z-tooltip) - 1);
+    border-radius: 0px 15px 0 0;
+}
+.tab:nth-child(3n){
+    box-shadow: none;
+    z-index: calc(var(--z-tooltip) - 2);
+}
+
+/* Estadisticas barras*/
+
+.stadistics__items, .time__items{
+    display: flex;
+    padding: 1.5rem 1.5rem 2.9rem;
+    gap: 1rem;
+    flex-direction: column;
+}
+.bar__item{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+.bar__item p {
+    padding-bottom: .3rem;
+    letter-spacing: .02rem;
+    text-align: start;
+}
+.bar__color, .clr{
+    width: auto;
+    height: .8rem;
+    background: var(--darkBlue);
+    border-radius: 1rem;
+    
+}
+
+/* graficos circulos*/
+.time__items{
+   flex-direction: row;
+   justify-content:space-around;
+   align-items: center;
+   
+}
+
+.circle__bar{ 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.circ__main , .circle__color{
+    fill: none;
+    stroke-dashoffset: 70;
+    transform: rotate(112deg);
+    transform-origin: 50% 50%; 
+    stroke-width: .55rem;
+    stroke-dasharray: 290;
+}
+
+svg{
+    position: absolute;
+}
+
+
+/* Degradados y posicion circulos svg */
+#usoCarga{
+    stroke: url(#gradient1);
+    stroke-dashoffset: 70;
+    stroke-dasharray: 240;
+}
+#tiempoCarga{
+    stroke: url(#gradient2);
+    stroke-dashoffset: 180;
+    stroke-dasharray: 240;
+}
+
+#mantenimientoMensual{
+    stroke: url(#gradient3);
+    stroke-dashoffset: 180;
+    stroke-dasharray: 240;
+}
+
+/*Textos SVG*/
+.text__circle{
+    display: flex;
+    width: 70%;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    font-family: var(--optionalTipo);
+    
+}
+.text__circle p{
+    font-size: 9px;
+
+}
+#number{
+    font-size: var(--s-h2);
+    font-weight: var(--fw-h4);
+}
+
+
+.tooltip{
+    max-width: 18rem;
+    background: var(--lightGreen);
+    padding: 1.3rem;
+    font-family:var(--optionalTipo);
+    color: var(--superContrastBlue);
+    font-size: 8px;
+    text-align: start;
+    position: absolute;
+    /* visibility: hidden;
+    transition: opacity 0.3s;
+    opacity: 0; */
+    display: inline-block;
+    z-index: var(--z-tooltip);
+    margin-top: -80%;
+}
+.tooltip:before{
+    content: "";
+    position: absolute;
+    top: 98%;
+    left: 80%;
+    margin-left: -1rem;
+    border-width: 1.5rem;
+    border-style: solid;
+    border-color:var(--lightGreen) transparent transparent transparent;
+    
+}
+.tooltip h5{
+    margin-bottom: .6rem;
+    font-size: var(--s-h5);
+}
+/* .tooltip:hover, .tooltip p, .tooltip h5{
+    /* visibility: hidden;
+    transition: opacity 0.9s;
+    opacity: 0; */
+    /* visibility: visible;
+    opacity: 1; 
+} */

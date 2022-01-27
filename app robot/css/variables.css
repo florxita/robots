@@ -1,0 +1,84 @@
+:root{
+    --header-height: 3rem;
+    --header-app: 6.5rem;
+
+
+/* ---- margenes ----- */
+
+    --m-0-25: .25rem;
+    --m-0-5: .5rem;
+    --m-0-75: .75rem;
+    --m-1: 1rem;
+    --m-1-5: 1.5rem;
+    --m-2: 2rem;
+    --m-2-5:2.5rem ;
+    
+    /* ---- padding ----- */
+    --pd-movil: 2rem;
+
+
+/* ----------------- PALETA ----------------- */
+
+    /* AZULES*/
+    --darkBlue:#1B262C;
+    --contrastBlue:#0D171D;
+    --ultraContrastBlue: #091217;
+    --superContrastBlue: #03090c;
+    --seaBlue:#3282B8;
+    --deepBlue:#0F4C75;
+    --lightBlue:#BBE1FA;
+
+    /* COLORES */
+    --pink: #DD486C;
+    --yellow:#F1BF0B;
+    --orange:#EB8033;
+
+    /*FUNCIONALES*/
+    --danger:#D80000;
+    --lightRed:#FFB3B3;
+    --success:#32E063;
+    --lightGreen:#BDFFA6;
+    --lightYellow:#DBD779;
+    
+    /*GRISES*/
+    --strong:#303136;
+    --medium:#505259;
+    --gray:#848793;
+    --soft:#A4B1BA;
+    --light:#C6D3DC;
+    --ultraLight:#DEE4E9;
+
+    /*GRADIENTS*/  
+
+    --blueGradient: linear-gradient(0deg, rgba(17,175,255,1) 0%,rgba(122,211,255,1) 100%);
+    --pinkGradient: linear-gradient(0deg, rgba(221,72,108,1) 0%,rgb(251, 147, 172) 100%);
+    --greenGradient: linear-gradient(0deg, rgba(50,224,99,1) 0%,rgb(125, 243, 158) 100%);
+    --orangeGradient: linear-gradient(0deg, rgba(235,128,51,1) 0%,rgb(248, 171, 115) 100%);
+
+/* ------------------ TEXTOS --------------*/
+
+    /* FONT WEIGHT */
+    --fw-h1:800;
+    --fw-h2:700;
+    --fw-h3:600;
+    --fw-h4:500;
+    --fw-p-s:400;
+    --fw-p:300;
+
+    /* FONT SIZE */
+    --s-h1:48px;
+    --s-h2:30px;
+    --s-h3:20px;
+    --s-h4:17px;
+    --s-h5: 13px;
+    --s-text: 14px;
+
+/* FONT FAMILY */   
+    --principalTipo:'Saira',sans-serif;
+    --optionalTipo: 'Lato', sans-serif;
+
+    /* ---- z index ------ */
+    --z-tooltip: 10;
+    --z-fixed: 100;
+    --z-section: 95;
+}

@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+    <script src="https://kit.fontawesome.com/deb8c39bd3.js" crossorigin="anonymous"></script>
+    <script src="modernizr-custom.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Saira:ital,wght@0,300;0,400;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet">
+    <title>Robot Guardian Web App</title>
+</head>
+<body id="body">
+    
+    <header class="header" id="header">
+
+        <nav class="nav__container">
+            <div class="nav__home">
+                <div class="nav__toggle" id="nav-toggle">
+                    <i class="bx bx-menu"></i>
+                </div>
+                <a href="" class="nav__container">
+                    <img src="img/LOGO.svg" alt="logo" class="nav__logo__img">
+                </a>
+            </div>
+            
+
+            <div class="nav__menu" id="nav-menu">
+                <div class="nav__close" id="nav-close">
+                    <i class="bx bx-x"></i>
+                </div>
+                <ul class="nav__list">
+                    <div class="icon__home">
+                        <a href="index.html">
+                        <img src="img/ISOTIPO.svg" alt=""></a>
+                    </div>
+                    <li class="nav__item">
+                        <a href="#catalogo" class="nav__link">Catálogo</a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="#nosotros" class="nav__link">Nosotros</a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="#precios" class="nav__link">Precios</a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="contacto" class="nav__link">Contacto</a>
+                    </li>
+                    <li class="nav__item miCuenta">
+                        <a href="miCuenta" class="nav__link miCuenta">Mi Cuenta</a>
+                        <div class="sesion__link">
+                            <a href="#registrarse">Registrarse</a>
+                            <a href="#sesion">Iniciar Sesion</a>
+                        </div>
+                    </li>
+
+                </ul>
+            </div>
+            
+        </nav>
+    </header>
+    <div class="menu__app">
+        <div class="icon__menu">
+            <a class="icon__btn" href="" id="menuAppBtn"> <img class="img__icon" src="img/Home.svg" alt="icono home"> </a>
+            <a class="icon__btn" href="" id="robotsAppBtn"><img class="img__icon" src="img/Robots.svg" alt="icono robots"></a>
+            <a class="icon__btn" href="" id="priceAppBtn"><img class="img__icon" src="img/Precios.svg" alt="icono precios"></a>
+            <a class="icon__btn" href="" id="profileAppBtn"><img class="img__icon" src="img/Perfil.svg" alt="icono perfil"></a>
+
+        </div>
+    </div>
+    <main class="main" id="main">
+    <!-- SECCION SLIDER-->
+        <section id="slider__box" class="slider__box">
+
+            <!-- CONTENIDO DEL BANNER PARA MODIFICAR -->
+            <div class="slider__item">
+                <div class="text__slider">
+                    <h1 class="title">20% off</h1>
+                    <h2>en todos robots</h2>
+                    <p>Consigue un descuento increible aplicando el
+                        siguiente código.</p>
+                        <button class="btn fill__btn fill__warning">Obtener Oferta</button>
+                </div>
+            </div>
+        </section>
+
+    <!-- SECCION #1 presentacion -->
+
+         <div class="intro section section__text">
+            <h2 class="title">Tomate un descanso</h2>
+            <p class="description__text">Cada uno de nuestros Robots fue diseñado con un objetivo, cumplir con tareas especificas del hogar.
+                Encontrá el tuyo y relajate.
+            </p>
+            <h3>¿En qué necesitas ayuda?</h3>
+
+            <section id="contenedorRobots" class="slider__section">
+                <!-- contenido insertado con js -->
+            </section>
+        </div>
+ <!-- INTRO a TABLA DE PRECIOS -->
+        <div class="intro section section__text">
+            <h2 class="title title__icon">Precios</h2>
+            <h4>Ya encontraste tu Robot?</h4>
+            <p class="description__text">Es momento de seleccionar tu plan ideal!!
+            </p>
+        </div>
+        <section id="prices" class="slider__section">
+            
+            <!-- aca inserto el javascript -->
+        </section>
+    </div> 
+
+       
+
+    <!-- SECCION #4 contacto -->
+    
+   <section class="section section__text">
+       <h2 class="tittle title__icon">Contacto</h2>
+       <p class="description__text">¿Dudas, curiosidad o sugerencias?
+           Dejá tu comentario aqui</p>
+       <form action="">
+           <input id="nombre" type="text" placeholder="Nombre" autofocus>
+           <input id="email" type="text" placeholder="Email">
+           <textarea name="mensaje" id="mensaje" placeholder="Mensaje"></textarea>
+           <button class="btn fill__btn send">Enviar</button>
+       </form> 
+       
+   </section>
+
+   <section class="section">
+       <div class="social__icons">
+           <i class="fab fa-instagram"></i>
+           <i class="fab fa-facebook"></i>
+           <i class="fab fa-twitter"></i>
+           <i class="fab fa-discord"></i>
+       </div>
+   </section>
+</main>
+
+<!-- SECCION PERFIL ROBOT -->
+<section id="sectionPerfilRobots" class="display__none">
+
+            <!-- <div id="tool" class="tooltip">
+                <h5>Mantenimiento 60%</h5>
+                <p>${nombreRobot} controla su gasto de energía tomando pequeñas siestas mientras tu descansas.
+                    Su gasto máximo puede llegar al 80% luego de una tarde jugando en el jardín, reservando el 20% para protegerte por las noches.
+                    Tiempo de carga de bateria (100%): 2hs.</p>
+            </div> -->
+
+                <div class="back"><i id="backBtn" class='bx bx-arrow-back' ></i></div>
+
+                <div id="perfilRobot" class="section">
+                    <!-- insertar contenido javaScript -->
+                </div>
+
+                <div id="tabs" class="tabs">
+                    <div class="tabs__container">
+                        <div class="tab__controls">
+                            <div class="tab tab__active active"><a href="#">Estadísticas</a></div>
+                            <div class="tab"><a href="#">Ficha</a></div>
+                            <div class="tab"><a href="#">Consejos</a></div>
+                        </div>
+                        
+                        <div id="tabBody" class="tab__body">
+                            <div class="tab__content__active active">
+                                <div id="stadisticsItems" class="stadistics__items">           
+                                    <!-- insertar contenido js -->
+                                </div>
+            
+                                <div class="time__items">
+                                    <div class="circle__bar">
+                                        <div class="text__circle">
+                                            <p>Uso máximo de 1 carga</p>
+                                            <p id="number">72</p>
+                                            <p>HORAS</p>
+                                        </div>
+                                        <svg class="circ__main" xmlns="http://www.w3.org/2000/svg" version="1.1" width="8rem" height="8rem" viewBox="0 0 90 90">
+                                            <circle cx="50%" cy="50%" r="40" stroke="#1B262C" stroke-linecap="round"/> 
+                                        </svg>
+                                        
+                                        <svg  id="usoCarga" class="circle__color" xmlns="http://www.w3.org/2000/svg" version="1.1" width="8rem" height="8rem" viewBox="0 0 90 90">
+                                            <defs>
+                                                <linearGradient id="gradient1">
+                                                    <stop offset="0%" stop-color="#7AD3FF" />
+                                                    <stop offset="100%" stop-color="#11AFFF" />
+                                                 </linearGradient>
+                                            </defs>
+                                            <circle class="circ2" cx="50%" cy="50%" r="40" stroke-linecap="round"/>
+                                        </svg>             
+                                    </div>
+
+                                    <div class="circle__bar" >
+                                        <div class="text__circle">
+                                            <p>Tiempo de carga</p>
+                                            <p id="number">30</p>
+                                            <p>MINUTOS</p>
+                                        </div>
+                                        
+                                        <svg class="circ__main" xmlns="http://www.w3.org/2000/svg" version="1.1" width="8rem" height="8rem" viewBox="0 0 90 90">
+                                            <circle cx="50%" cy="50%" r="40" stroke="#1B262C" stroke-linecap="round"/> 
+                                        </svg>
+                                        
+                                        <svg class="circle__color" xmlns="http://www.w3.org/2000/svg" version="1.1" width="8rem" height="8rem" viewBox="0 0 90 90">
+                                            <defs>
+                                               <linearGradient id="gradient2">
+                                                  <stop offset="0%" stop-color="#FB9EB4" />
+                                                  <stop offset="100%" stop-color="#DD486C" />
+                                               </linearGradient>
+                                            </defs>
+                                            <circle id="tiempoCarga" class="circ2" cx="50%" cy="50%" r="40" stroke-linecap="round"/>
+                                        </svg>
+            
+                                    </div>
+
+                                </div>
+                    </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hire__robot section">
+                    <h3>¿Es lo que estás buscando?</h3>
+                    <btn class=" btn fill__btn fill__blue">Contratar a Winston</btn>
+                </div>   
+</section>
+
+    
+    <script src="app.js"></script>
+</body>
+</html>
