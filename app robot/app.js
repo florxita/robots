@@ -5,9 +5,9 @@ const header = document.getElementById('header'),
       main = document.getElementById('main'),//<-- solo contiene el home/inicio
 
       perfilRobot = document.getElementById('perfilRobot'),
-      sectionPerfilRobots = document.getElementById('sectionPerfilRobots') //<-- seccion perfil completo
+      sectionPerfilRobots = document.getElementById('sectionPerfilRobots') 
 
-const stadisticsItems = document.getElementById('stadisticsItems') //innerHTML de crearEstadisticas
+
 
 let indiceRobot = 0 // ya le indico que arranca desde el 0 (el 0 es Winston)
 
@@ -24,37 +24,29 @@ async function obtenerDatos(indiceRobot){
     const response = await fetch("http://127.0.0.1:5500/robots.json");
     const robots = await response.json();
 
-    console.log(robots[0])//<--- es para guiarme 
+    console.log(robots)//<--- es para guiarme 
 
-    // pruebo de localizar cada indice para las tabs / ESTADISTICAS / BARRAS DE COLOR / solo el .value es el que voy a usar para esto
+    ////////  FUNCIONES QUE SE EJECUTAN AL CARGAR EL .JSON  ////////
+
+    crearSliderRobot(robots, indiceRobot)
+   
+    capturarEventoBotonVerFicha() // <-- guarde el evento click sobre el boton "ver ficha" y "back"
+    
+    
+    
+
+}
+
+crearSliderRobot = (robots, indiceRobot) => { 
     energy = robots[indiceRobot][0].statistics[0].energy[0].value,
     maintenance = robots[indiceRobot][0].statistics[0].maintenance[0].value,
     complexity = robots[indiceRobot][0].statistics[0].complexity[0].value,
     security = robots[indiceRobot][0].statistics[0].security[0].value
 
-    ////////  FUNCIONES QUE SE EJECUTAN AL CARGAR EL .JSON  ////////
-
-    //ejecuto la funcion y creo slider , tambien la tabla de precios
-    crearSliderRobot(robots, indiceRobot) // mi array robot +
-    //crearTablaPrecios(planes)
-    capturarEventoArrow(robots, indiceRobot) //<-- guarde el evento de las flechas del slider
-    capturarEventoBotonVerFicha() // <-- guarde el evento click sobre el boton "ver ficha" y "back"
-    crearPerfil(robots, indiceRobot)
-    crearEstadisticas(robots, indiceRobot)
-    //crearTooltip(robots,indiceRobot)
-    
-
-}
-
-
-//creo slider con template --- en el home/inicio -- no en la seccion de datos del robot
-crearSliderRobot = (robots, indiceRobot) => { // e inserto el html dentro de section id robots
-    //analizar como cambiar el "href" del boton en cada "previa de robot" (y si uso un switch para comparar el contexto del boton? --> fileRobotBtn)
-
     activeSlider.innerHTML = `
             <i id="arrowLeft" class='bx bx-chevron-left'></i>
             <div id="sliderElement">
-                        <img class="image__robot" src="${robots[indiceRobot][0].src}" alt="robot">
+                        <img class="image__preview" src="${robots[indiceRobot][0].preview}" alt="robot">
                         <div class ="text__robot__slider">
                              <h2 class="robot__name title">${robots[indiceRobot][0].name}</h2>
                              <h3 class="s__work">${robots[indiceRobot][0].type}</h3>
@@ -64,34 +56,43 @@ crearSliderRobot = (robots, indiceRobot) => { // e inserto el html dentro de sec
             </div>
             <i id="arrowRight" class='bx bx-chevron-right'></i>
     `
+    capturarEventoArrow(robots, indiceRobot) 
 }
 
 //VISTA PREVIA DEL ROBOT EN EL INICIO
 
 //eventListener de arrows // al hacer click activa la funcion de crearSliderRobot
-const capturarEventoArrow = (robots, indiceRobot) =>{ 
+const capturarEventoArrow = (robots, indice) =>{ 
     document.addEventListener('click', (e) =>{ 
         e.preventDefault
         //e.cancelBubble  
         if(e.target.id === 'arrowRight') { 
-            indiceRobot++  //incremento el indice
+            indice++  //incremento el indice
+            indiceRobot++
             // console.log('-----------');
             // console.log('Aumentando' + indiceRobot)
             //console.log('Aumentando' + robots.length)
-            if(indiceRobot == robots.length){
-                indiceRobot = 0
+            if(indice == robots.length){
+               indice = 0
             }
-            crearSliderRobot(robots, indiceRobot);
-
+            crearSliderRobot(robots, indice);
+            crearPerfil(robots, indice)
+            crearEstadisticas(robots, indice)
+    
         }else if(e.target.id === 'arrowLeft'){
             indiceRobot-- //resto el indice
+            indice--
             //console.log('-----------');
             //console.log('Restando' + robots.length)
             //console.log('Aumentando' + indiceRobot)
-            if(indiceRobot < 0){
-                indiceRobot = robots.length - 1
+            if(indice < 0){
+                indice = robots.length - 1
+                crearSliderRobot(robots, indice);
+                crearPerfil(robots, indiceRobot)
+                crearEstadisticas(robots, indiceRobot)    
+                
             }
-            crearSliderRobot(robots, indiceRobot);
+
         }
     })
 }
@@ -102,7 +103,7 @@ const capturarEventoBotonVerFicha = () => { // guardo el evento al clikear el bo
     document.addEventListener('click', e =>{
         e.preventDefault()
         e.stopPropagation()
-        // esto no anda aca --> crearPerfil(robots, indiceRobot) //<-- ejecuto la seccion completa del robot seleccionado //le cambio el display para que se muestre al hacer click en el boton
+
         if(e.target.id == 'fileRobotBtn'){
             main.classList.add('display__none');
             header.classList.add('display__none');
@@ -141,7 +142,6 @@ const cargarItemsTabla = () =>{
             return itemsArray.map(x => `<li>${x}</li>`).join('')
         }
     }).join('')
-    
 }
 //template de tabla de precios
 window.addEventListener('DOMContentLoaded', () => {
@@ -162,13 +162,11 @@ prices.innerHTML = `
     `
 })
 
-///////////////////////////////////////////////////////////
 ///////////////// PERFIL ROBOT ///////////////////////////
 
 //console.log(robots[0][0].statistics[0].complexity[0].value)  
 
-
-crearPerfil = (robots, indiceRobot) =>{ // TEMPLATE que quiero insertar en PERFIL ROBOT
+crearPerfil = (robots, indiceRobot) =>{
     perfilRobot.innerHTML = `
     <div id="sliderElement">
          <img class="image__robot" src="${robots[indiceRobot][0].src}" alt="robot">
@@ -179,40 +177,70 @@ crearPerfil = (robots, indiceRobot) =>{ // TEMPLATE que quiero insertar en PERFI
                 </div>
     </div>
     `
-    
 }
 //-----------------------------------------------------------
 
-crearEstadisticas = (robots) => { //el template con los ids que guardo luego
-    stadisticsItems.innerHTML = `
-        <div class="bar__item" id="energyBar">
-            <p>Energia</p>
-            <div class="bar__color">
-                <div id="barBlue" class="clr"></div>
+crearEstadisticas = (robots) => { 
+    const contentActive = document.getElementById('contentActive') 
+    const others = robots[indiceRobot][0].statistics[0].other[0].batteryLife[0].value
+
+
+    contentActive.innerHTML = `
+            <div id="stadisticsItems" class="stadistics__items">
+                <div class="bar__item" id="energyBar">
+                    <p>Energia</p>
+                    <div class="bar__color">
+                        <div id="barBlue" class="clr"></div>
+                    </div>
+                    <div> </div>
+                </div>
+
+                <div class="bar__item" id="maintenanceBar">
+                    <p>Mantenimiento</p>
+                    <div class="bar__color">
+                        <div id="barPink" class="clr"></div>
+                    </div>
+                </div>
+
+                <div class="bar__item" id="complexBar">
+                    <p>Complejidad</p>
+                    <div class="bar__color">
+                        <div id= "barOrange" class="clr"></div>
+                    </div>
+                </div>
+
+                <div class="bar__item" id="securityBar">
+                    <p>Seguridad</p>
+                    <div class="bar__color">
+                        <div id="barGreen" class="clr"></div>
+                    </div>
+                </div>
+
+                <div class="time__items">
+                    <div class="text__circle">
+                          <span>Uso máximo de 1 carga</span>
+                          <span class="number">${others}</span>
+                          <span>HORAS</span>
+                    </div>
+                    <svg class="circ__main"
+                         xmlns="http://www.w3.org/2000/svg"version="1.1" width="8rem" height="8rem" viewBox="0 0 90 90">
+                         <circle cx="50%" cy="50%" r="40" stroke="#1B262C" stroke-linecap="round"/> 
+                    </svg>
+                    <svg  id="batteryLife" class="circle__color"
+                        xmlns="http://www.w3org/2000/svg" version="1.1" width="8rem" height="8rem"viewBox="0 0 90 90">
+                        <defs>
+                            <linearGradient id="gradient1">
+                                <stop offset="0%" stop-color="#7AD3FF" />
+                                <stop offset="100%" stop-color="#11AFFF" />
+                            </linearGradient>
+                        </defs>
+                        <circle class="progress__circle" cx="50%" cy="50%" r="40" stroke-linecap="round"/>
+                    </svg>             
+                </div>
+                    
             </div>
         </div>
-
-        <div class="bar__item" id="maintenanceBar">
-            <p>Mantenimiento</p>
-            <div class="bar__color">
-                <div id="barPink" class="clr"></div>
-            </div>
-       </div>
-
-        <div class="bar__item" id="complexBar">
-            <p>Complejidad</p>
-            <div class="bar__color">
-                <div id= "barOrange" class="clr"></div>
-            </div>
-        </div>
-
-        <div class="bar__item" id="securityBar">
-            <p>Seguridad</p>
-            <div class="bar__color">
-                <div id="barGreen" class="clr"></div>
-            </div>
-            
-        </div>`
+`
     // capturo los ids de cada barrita       
     barBlue = document.getElementById('barBlue');
     barPink = document.getElementById('barPink');
@@ -222,6 +250,20 @@ crearEstadisticas = (robots) => { //el template con los ids que guardo luego
     darEstilos() // le doy los estilos
     insertarTooltips()
 
+    const circumference = document.querySelector(".progress__circle").getTotalLength();
+    //const circulofinal = circumference.getTotalLength()
+    console.log(circumference)
+    
+
+    // let counter = 0;
+    // setInterval(() => {
+    //     if(counter == others){
+    //         clearInterval()
+    //     }else{
+    //         counter+= 1;
+    //         numb.textContent = counter +'%'
+    //     }
+    // }, 80);
 }
 
 const darEstilos = () => { // para darle elcolor y % a cada barra
@@ -240,20 +282,20 @@ const insertarTooltips = () => {
     const barrita = document.getElementById('stadisticsItems')
     const contenedorBarras = barrita.children
     const barras = Array.from(contenedorBarras)
-    console.log(barras)
+    //console.log(barras)
     barras.forEach( barra => {
         barra.addEventListener('click', e =>{
             //console.log(e.currentTarget.id)
             if(e.currentTarget.id == 'energyBar'){
                 console.log('barra 1')
-                crearTooltip(e.currentTarget)
-                // e.currentTarget.innerHTML = `
+                //crearTooltip(e.currentTarget)
+                // energyBar.innerHTML =`
                 // <div id="tool" class="tooltip">
                 //      <h5>energia 50%</h5>
                 //      <p>controla su gasto de energía tomando pequeñas siestas mientras tu descansas.
                 //     Su gasto máximo puede llegar al 80% luego de una tarde jugando en el jardín, reservando el 20% para protegerte por las noches.
                 //     Tiempo de carga de bateria (100%): 2hs.</p>
-                // </div>`
+                // // </div>`
             }else if(e.currentTarget.id == 'maintenanceBar'){
                 console.log('barra 2')
                 //crearTooltip(robot)
@@ -264,7 +306,6 @@ const insertarTooltips = () => {
             }
         })
     })
-    
 }
 
 crearTooltip = (robots, indiceRobot) => { //quiero crear un tooltip por cada barra
@@ -278,42 +319,43 @@ crearTooltip = (robots, indiceRobot) => { //quiero crear un tooltip por cada bar
     </div>`
 }
 
+/////////////////////////////////////////////
+// DEFINIENDO LOS ESTADOS ACTIVOS / INACTIVOS DE LA FICHA
 
+    const tabControl = document.getElementById('tabControl')
+    const tabsContainer = tabControl.children
+    const tabs = Array.from(tabsContainer)
+
+    //console.log(tabs)
+
+    tabs.forEach(tab =>{
+        tab.addEventListener('click', e =>{
+            const target = e.currentTarget
+                console.log(target)
+            target.classList.add('tab__active')
+            const arrayHermanos = tabs.filter((tab) => tab.id != target.id)
+                arrayHermanos.forEach(tab => {
+                    tab.classList.remove('tab__active')
+                })
+        })
+    })
     
-// switch ('energyBar') {
-//         case 'energyBar':
-//                console.log('hago algo en r1')      
-//             break;
-//         case 'maintenace':
-//             console.log('hago algo en r2')   
-//             break;
-
-//         case 'complexity':
-//             console.log('hago algo en r3')
-//             break;
-
-//         case 'security':
-//             console.log('hago algo en r4')
-
-//             break;
-//     }
-
-
 
 //////////////////////////////  MENU  //////////////////////////////
 
 //menu hamburguesa
-const navMenu = document.getElementById('nav-menu'),
-      navToggle = document.getElementById('nav-toggle'),
-      navClose = document.getElementById('nav-close')
-    //mostrar menu
-    if(navToggle){
-        navToggle.addEventListener('click', ()=>{
-            navMenu.classList.add('show-menu')
-        })
-    }
-    if(navClose){
-        navClose.addEventListener('click',()=>{
-            navMenu.classList.remove('show-menu')
-        })
-    }
+// const navMenu = document.getElementById('nav-menu'),
+//       navToggle = document.getElementById('nav-toggle'),
+//       navClose = document.getElementById('nav-close')
+//     //mostrar menu
+//     if(navToggle){
+//         navToggle.addEventListener('click', ()=>{
+//             navMenu.classList.add('show-menu')
+//         })
+//     }if(navClose){
+//         navClose.addEventListener('click',()=>{
+//             navMenu.classList.remove('show-menu')
+//         })
+//     }
+
+    

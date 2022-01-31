@@ -245,7 +245,12 @@ p{
 .text__robot__slider{
     margin-bottom: 3rem;
 }
-
+.image__preview{
+    max-width: 17rem;
+}
+.image__robot{
+    max-width: 20rem;
+}
 /* ---------------- SECTION -------------------------------------- */
 
 .slider__section, .section, .perfilRobotActive{ /*//////////*/
@@ -390,48 +395,48 @@ textarea{
 /* tabs */
 .tabs{
     width: 100%; 
-    border-radius: 15px;
-    background: var(--superContrastBlue);
-    background: linear-gradient(90deg, rgba(9,18,23,1) 50%,rgba(3,9,11,1) 50%);
+    
+    
 }
 .tab__controls{
     display: flex;
-    justify-content: space-around;   
+    justify-content: space-around;  
+    background: var(--ultraContrastBlue); 
     flex: 1;
-}
-.tab__active a , .tab a{
-    color: #fff;
+    border-radius: 15px 15px 0 0;
 }
 
-.tab__content__active{
-    opacity: 1;
-}
 .tab{  
     width: 100%;
     text-align: center;
-    padding: .7rem;  
-}
-.tab__body{
-    background: var(--contrastBlue); 
-    border-radius: 0 0 15px 15px;
-    padding-bottom: 2rem;
+    padding: .7rem;
+    background: var(--ultraContrastBlue);
+    border-radius: 15px 15px 0 0;
     
 }
-.tab__active{
+
+.tab__body{
+    background: var(--ultraContrastBlue); 
+    border-radius: 0 0 15px 15px;  
+}
+
+.tab__active{ /* < -------   ESTADO ACTIVO DE PESTANA   */
     background: var(--contrastBlue);    
-    z-index:var(--z-tooltip);
-    box-shadow: 3px 0px 2px rgba(0, 0, 0, 0.2);
-    border-radius: 15px 15px 0 0; 
-     
+    z-index:var(--z-tooltip);  
+    box-shadow: 3px 0px 2px 0px rgba(0, 0, 0, 0.2); 
 }
+
 .tab:nth-child(2n){
-    background: var(--ultraContrastBlue);
     z-index: calc(var(--z-tooltip) - 1);
-    border-radius: 0px 15px 0 0;
+    
 }
+
 .tab:nth-child(3n){
     box-shadow: none;
     z-index: calc(var(--z-tooltip) - 2);
+}
+.tab__content__active{
+    background: var(--contrastBlue);
 }
 
 /* Estadisticas barras*/
@@ -475,11 +480,11 @@ textarea{
 }
 .circ__main , .circle__color{
     fill: none;
-    stroke-dashoffset: 70;
-    transform: rotate(112deg);
+    /* stroke-dashoffset: 0; */
+    /* transform: rotate(112deg); */
     transform-origin: 50% 50%; 
     stroke-width: .55rem;
-    stroke-dasharray: 290;
+    /* stroke-dasharray:0; */
 }
 
 svg{
@@ -488,23 +493,24 @@ svg{
 
 
 /* Degradados y posicion circulos svg */
-#usoCarga{
+
+
+.progress__circle, #batteryLife{
     stroke: url(#gradient1);
-    stroke-dashoffset: 70;
-    stroke-dasharray: 240;
+    stroke-dasharray: 250;
+    stroke-dashoffset: 0;
+    animation: anim 2s linear forwards;
 }
-#tiempoCarga{
+#chargeTime{
     stroke: url(#gradient2);
-    stroke-dashoffset: 180;
-    stroke-dasharray: 240;
+    /* stroke-dashoffset: 95; */
+    /* stroke-dasharray: 240; */
 }
-
-#mantenimientoMensual{
-    stroke: url(#gradient3);
-    stroke-dashoffset: 180;
-    stroke-dasharray: 240;
-}
-
+/* @keyframes anim{
+    100%{
+        stroke-dashoffset: 300;
+    }
+} */
 /*Textos SVG*/
 .text__circle{
     display: flex;
@@ -515,13 +521,14 @@ svg{
     font-family: var(--optionalTipo);
     
 }
-.text__circle p{
+.text__circle{
     font-size: 9px;
+    
 
 }
-#number{
+.number{
     font-size: var(--s-h2);
-    font-weight: var(--fw-h4);
+    font-weight: var(--fw-h2);
 }
 
 

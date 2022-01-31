@@ -156,65 +156,28 @@
 
                 <div id="tabs" class="tabs">
                     <div class="tabs__container">
-                        <div class="tab__controls">
-                            <div class="tab tab__active active"><a href="#">Estadísticas</a></div>
-                            <div class="tab"><a href="#">Ficha</a></div>
-                            <div class="tab"><a href="#">Consejos</a></div>
+                        <div id="tabControl" class="tab__controls">
+                            <div id="tabEstadisticas" class="tab tab__active">Estadísticas</div>
+                            <div id="tabFicha" class="tab">Ficha</div>
+                            <div id="tabConsejos" class="tab">Consejos</div>
                         </div>
                         
                         <div id="tabBody" class="tab__body">
-                            <div class="tab__content__active active">
-                                <div id="stadisticsItems" class="stadistics__items">           
+                            <div id="contentActive" class="tab__content__active">
                                     <!-- insertar contenido js -->
-                                </div>
-            
-                                <div class="time__items">
-                                    <div class="circle__bar">
-                                        <div class="text__circle">
-                                            <p>Uso máximo de 1 carga</p>
-                                            <p id="number">72</p>
-                                            <p>HORAS</p>
-                                        </div>
-                                        <svg class="circ__main" xmlns="http://www.w3.org/2000/svg" version="1.1" width="8rem" height="8rem" viewBox="0 0 90 90">
-                                            <circle cx="50%" cy="50%" r="40" stroke="#1B262C" stroke-linecap="round"/> 
-                                        </svg>
-                                        
-                                        <svg  id="usoCarga" class="circle__color" xmlns="http://www.w3.org/2000/svg" version="1.1" width="8rem" height="8rem" viewBox="0 0 90 90">
-                                            <defs>
-                                                <linearGradient id="gradient1">
-                                                    <stop offset="0%" stop-color="#7AD3FF" />
-                                                    <stop offset="100%" stop-color="#11AFFF" />
-                                                 </linearGradient>
-                                            </defs>
-                                            <circle class="circ2" cx="50%" cy="50%" r="40" stroke-linecap="round"/>
-                                        </svg>             
-                                    </div>
 
-                                    <div class="circle__bar" >
-                                        <div class="text__circle">
-                                            <p>Tiempo de carga</p>
-                                            <p id="number">30</p>
-                                            <p>MINUTOS</p>
+                                    <!-- <div class="progress__circle">
+                                        <div class="inner"></div>
+                                        <div class="circle">
+                                            <div class="bar left">
+                                                <div class="progress"></div>
+                                            </div>
+                                            <div class="bar right">
+                                                <div class="progress"></div>
+                                            </div>
                                         </div>
-                                        
-                                        <svg class="circ__main" xmlns="http://www.w3.org/2000/svg" version="1.1" width="8rem" height="8rem" viewBox="0 0 90 90">
-                                            <circle cx="50%" cy="50%" r="40" stroke="#1B262C" stroke-linecap="round"/> 
-                                        </svg>
-                                        
-                                        <svg class="circle__color" xmlns="http://www.w3.org/2000/svg" version="1.1" width="8rem" height="8rem" viewBox="0 0 90 90">
-                                            <defs>
-                                               <linearGradient id="gradient2">
-                                                  <stop offset="0%" stop-color="#FB9EB4" />
-                                                  <stop offset="100%" stop-color="#DD486C" />
-                                               </linearGradient>
-                                            </defs>
-                                            <circle id="tiempoCarga" class="circ2" cx="50%" cy="50%" r="40" stroke-linecap="round"/>
-                                        </svg>
-            
-                                    </div>
-
-                                </div>
-                    </div>
+                                    </div> -->
+                            </div>
                         </div>
                     </div>
                 </div>
