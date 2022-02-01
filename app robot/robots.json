@@ -146,7 +146,7 @@
                 "chargeTime": [
                   {
                     "value": 30,
-                    "dashoffset": 240
+                    "dashoffset": 170
                   }
                 ]
               }
@@ -196,11 +196,11 @@
     [
       {
         "id": "r3",
-        "name": "Lady Beth",
-        "type": "Tu niñera Favorita",
-        "work": "Cuidado de humanos y mascotas",
-        "preview": "img/previa_r2.png",
-        "src": "img/robot_2.png",
+        "name": "Chef Stephen",
+        "type": "Chef 24/7",
+        "work": "Cocina y manipulacion de alimentos ",
+        "preview": "img/previa_r1.png",
+        "src": "img/robot_1.png",
         "description": "Delicada y carinosa, cuidara de todos los miembros de la familia las 24 hs.",
         "statistics": [
           {
@@ -236,13 +236,13 @@
               {
                 "batteryLife": [
                   {
-                    "value": 72,
+                    "value": 50,
                     "dashoffset": 240
                   }
                 ],
                 "chargeTime": [
                   {
-                    "value": 30,
+                    "value": 50,
                     "dashoffset": 240
                   }
                 ]
@@ -296,8 +296,8 @@
         "name": "Super",
         "type": "Tu hogar brillara con su presencia",
         "work": "Limpieza del hogar",
-        "preview": "img/previa_r2.png",
-        "src": "img/robot_2.png",
+        "preview": "img/previa_r1.png",
+        "src": "img/robot_1.png",
         "description": "Delicada y carinosa, cuidara de todos los miembros de la familia las 24 hs.",
         "statistics": [
           {
@@ -333,13 +333,13 @@
               {
                 "batteryLife": [
                   {
-                    "value": 72,
+                    "value": 100,
                     "dashoffset": 240
                   }
                 ],
                 "chargeTime": [
                   {
-                    "value": 30,
+                    "value": 100,
                     "dashoffset": 240
                   }
                 ]

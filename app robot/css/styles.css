@@ -284,7 +284,7 @@ p{
 
 .title__icon::after, .title__icon::before{
     font-family: "Boxicons";
-    content: "\ebac";
+    content: "\eeb8";
     padding: 1rem;
     font-size: var(--s-h3);
 }
@@ -469,48 +469,45 @@ textarea{
 .time__items{
    flex-direction: row;
    justify-content:space-around;
-   align-items: center;
+   margin-top: 2rem;
+   padding: 0px;
    
 }
 
-.circle__bar{ 
+.circle__load{ 
     display: flex;
     justify-content: center;
     align-items: center;
 }
 .circ__main , .circle__color{
     fill: none;
-    /* stroke-dashoffset: 0; */
-    /* transform: rotate(112deg); */
     transform-origin: 50% 50%; 
     stroke-width: .55rem;
-    /* stroke-dasharray:0; */
 }
 
 svg{
     position: absolute;
 }
 
-
 /* Degradados y posicion circulos svg */
 
-
-.progress__circle, #batteryLife{
+.progress__circle{
+    
+    stroke-dashoffset: 260;
+    stroke-dasharray: 260; 
+}
+.batteryLife{
     stroke: url(#gradient1);
-    stroke-dasharray: 250;
-    stroke-dashoffset: 0;
-    animation: anim 2s linear forwards;
+    /* animation: anim 2s linear forwards; */
+    /* stroke-dasharray: 200; */
 }
-#chargeTime{
+
+.chargeTime{
+    /* animation: anim 2s linear forwards; */
     stroke: url(#gradient2);
-    /* stroke-dashoffset: 95; */
-    /* stroke-dasharray: 240; */
+    /* stroke-dashoffset: 170; */
 }
-/* @keyframes anim{
-    100%{
-        stroke-dashoffset: 300;
-    }
-} */
+
 /*Textos SVG*/
 .text__circle{
     display: flex;
@@ -519,18 +516,16 @@ svg{
     justify-content: center;
     text-align: center;
     font-family: var(--optionalTipo);
-    
+    animation: show 1s ease;
 }
 .text__circle{
-    font-size: 9px;
-    
-
+    font-size: 8px;
 }
+
 .number{
     font-size: var(--s-h2);
     font-weight: var(--fw-h2);
 }
-
 
 .tooltip{
     max-width: 18rem;
@@ -557,12 +552,13 @@ svg{
     border-width: 1.5rem;
     border-style: solid;
     border-color:var(--lightGreen) transparent transparent transparent;
-    
 }
+
 .tooltip h5{
     margin-bottom: .6rem;
     font-size: var(--s-h5);
 }
+
 /* .tooltip:hover, .tooltip p, .tooltip h5{
     /* visibility: hidden;
     transition: opacity 0.9s;
@@ -570,3 +566,77 @@ svg{
     /* visibility: visible;
     opacity: 1; 
 } */
+
+@keyframes show{
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
+}
+
+ /* ///////////////  ficha tecnica ////////// */
+
+.data__sheet, .advice{
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 50px;
+    font-family: 'lato', sans-serif;
+    padding: 0 var(--m-2);
+}
+
+table{
+    display: flex;
+    justify-content: center;
+    width: auto;
+    border: 1px solid #fff;
+    border-collapse:collapse;
+}
+
+.info__table{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.title__table{ 
+     transform: rotate(-90deg);
+} 
+
+.items__table, .lista__datasheet li{
+    border: solid #fff 1px;
+    font-size: 11px;
+    padding: .5rem;
+}
+
+.datasheet__text, .datasheet__text li, .advice__list li{
+    font-size: 13px;
+    font-weight:100;
+}
+
+.datasheet__text{
+    padding: 1.5rem 0;
+    font-size: var(--s-h5);
+}
+
+.datasheet__text .span{
+    padding-bottom: 2rem;
+}
+
+.datasheet__text a, .advice__list li a{
+    color: var(--yellow);
+}
+
+/* .advice__list li:before{
+    font-family: "Boxicons";
+    content: "\ede2";
+
+} */
+.advice__list li{
+    list-style: circle;
+}
